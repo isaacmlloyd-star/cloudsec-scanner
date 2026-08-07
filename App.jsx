@@ -14,6 +14,10 @@ const firebaseConfig = {
   appId: "1:531281739638:web:5ed84fdf4ec573fe654457"
 };
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('scanner'); // 'scanner' or 'dashboard'
