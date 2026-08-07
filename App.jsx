@@ -5,11 +5,14 @@ import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore
 import { ShieldAlert, ShieldCheck, AlertTriangle, Play, RefreshCw, Database, Code, Clock } from 'lucide-react';
 
 // --- 1. FIREBASE SYSTEM INITIALIZATION ---
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+const firebaseConfig = {
+  apiKey: "AIzaSyB4bjUAjiIgTMJTZ8KG2HIe5_bPBbw0yhw",
+  authDomain: "cloudsec-backend.firebaseapp.com",
+  projectId: "cloudsec-backend",
+  storageBucket: "cloudsec-backend.firebasestorage.app",
+  messagingSenderId: "531281739638",
+  appId: "1:531281739638:web:5ed84fdf4ec573fe654457"
+};
 
 export default function App() {
   const [user, setUser] = useState(null);
