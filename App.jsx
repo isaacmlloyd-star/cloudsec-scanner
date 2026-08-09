@@ -27,6 +27,9 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('scanner'); // 'scanner' or 'dashboard'
   const [code, setCode] = useState('');
+  const [analysis, setAnalysis] = useState('');
+const [isAnalyzing, setIsAnalyzing] = useState(false);
+
   const [isScanning, setIsScanning] = useState(false);
   const [scanHistory, setScanHistory] = useState([]);
   const [currentResults, setCurrentResults] = useState(null);
