@@ -57,7 +57,7 @@ export default function App() {
     if (!user) return;
 
     // Secure, private path for this specific user
-    const scansRef = collection(db, 'artifacts', appId, 'users', user.uid, 'scans');
+    const scansRef = collection(db, 'artifacts', firebaseConfig.appId, 'users', user.uid, 'scans');
     
     const unsubscribe = onSnapshot(scansRef, (snapshot) => {
       const scans = snapshot.docs.map(doc => ({
