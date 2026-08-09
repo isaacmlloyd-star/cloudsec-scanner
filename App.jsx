@@ -29,6 +29,47 @@ export default function App() {
   const [code, setCode] = useState('');
   const [analysis, setAnalysis] = useState('');
 const [isAnalyzing, setIsAnalyzing] = useState(false);
+const getVulnerabilityAnalysis = async (threatType, vulnerableSnippet) => {
+  setIsAnalyzing(true);
+  setAnalysis('');
+
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+  const prompt = `
+You are a code security auditor. Analyze the following issue found in static code analysis:
+
+Threat Type: ${threatType}
+Vulnerable Code:
+${vulnerableSnippet}
+
+Provide a concise breakdown:
+1. Root Cause Analysis
+2. Security Impact
+3. Secure Code Remediation (show corrected code)
+`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+      }),
+    });
+
+    const data = await response.json();
+    const output = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No analysis available.';
+    setAnalysis(output);
+  } catch (error) {
+    console.error('Error fetching analysis:', error);
+    setAnalysis('Failed to fetch vulnerability analysis. Check API key and network connection.');
+  } finally {
+    setIsAnalyzing(false);
+  }
+};
 
   const [isScanning, setIsScanning] = useState(false);
   const [scanHistory, setScanHistory] = useState([]);
