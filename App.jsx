@@ -1,3 +1,8 @@
+import VConsole from 'vconsole';
+if (typeof window !== 'undefined') {
+  new VConsole();
+} 
+
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
