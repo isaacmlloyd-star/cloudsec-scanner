@@ -288,6 +288,20 @@ Provide a concise breakdown:
                           <span className="text-slate-500 mr-2">{vuln.lineNum} |</span>
                           {vuln.codeSnippet}
                         </code>
+                        <button 
+  onClick={() => getVulnerabilityAnalysis(vuln.type, vuln.codesnippet)}
+  disabled={isAnalyzing}
+  className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 w-full"
+>
+  {isAnalyzing ? 'Analyzing...' : 'Generate Fix & Analysis'}
+</button>
+
+{analysis && (
+  <div className="mt-4 p-4 bg-gray-800 text-gray-100 rounded border border-gray-700 whitespace-pre-wrap font-mono text-sm text-left">
+    {analysis}
+  </div>
+)}
+
                       </div>
                     ))}
                   </div>
